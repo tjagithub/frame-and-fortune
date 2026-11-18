@@ -1,14 +1,14 @@
 export type Difficulty = "easy" | "medium" | "hard";
 
 export const DIFFICULTIES: { id: Difficulty; label: string }[] = [
-  { id: "easy", label: "Half hidden" },
-  { id: "medium", label: "Black box" },
+  { id: "easy", label: "Clear" },
+  { id: "medium", label: "Covered" },
   { id: "hard", label: "Mosaic" },
 ];
 
 /** Mosaic tiles across the frame width; lower is blockier. */
 export const MOSAIC_TILES = 36;
-/** Share of width and height covered by the medium-difficulty centre panel. */
+/** Share of width and height covered by the centre black box. */
 export const PANEL = 0.65;
 
 async function load(src: string): Promise<HTMLImageElement> {
@@ -38,16 +38,17 @@ export async function obscure(src: string, difficulty: Difficulty): Promise<stri
     small.getContext("2d")!.drawImage(img, 0, 0, tw, th);
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(small, 0, 0, w, h);
-  } else if (difficulty === "medium") {
+  } else if (difficulty === "easy") {
     ctx.drawImage(img, 0, 0);
-    ctx.fillRect((w * (1 - PANEL)) / 2, (h * (1 - PANEL)) / 2, w * PANEL, h * PANEL);
   } else {
+    // Medium: a centre black box or one half hidden, picked per frame.
     ctx.drawImage(img, 0, 0);
-    const side = Math.floor(Math.random() * 4);
+    const side = Math.floor(Math.random() * 5);
+    if (side === 4) ctx.fillRect((w * (1 - PANEL)) / 2, (h * (1 - PANEL)) / 2, w * PANEL, h * PANEL);
     if (side === 0) ctx.fillRect(0, 0, w / 2, h);
     else if (side === 1) ctx.fillRect(w / 2, 0, w / 2, h);
     else if (side === 2) ctx.fillRect(0, 0, w, h / 2);
-    else ctx.fillRect(0, h / 2, w, h / 2);
+    else if (side === 3) ctx.fillRect(0, h / 2, w, h / 2);
   }
   return canvas.toDataURL("image/jpeg", 0.88);
 }

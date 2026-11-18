@@ -11,8 +11,8 @@ Built with Tauri 2 (Rust), TypeScript, GSAP, three.js and Strudel.
 - Each wrong guess gives a hint: the year, the channel or episode, another frame, then letters of the title.
 - **Modes:** *Multiple choice* (6 options, keys 1–6) or *Type it* (fuzzy search over your library).
 - **Difficulty:**
-  - *Easy*: half of the frame is hidden.
-  - *Medium*: a black box covers the centre.
+  - *Easy*: the whole frame is shown.
+  - *Medium*: a black box covers the centre, or half of the frame is hidden.
   - *Hard*: the frame is a mosaic.
 
 ### Party Play
