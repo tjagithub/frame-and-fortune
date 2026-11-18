@@ -48,6 +48,8 @@ cargo test --manifest-path src-tauri/Cargo.toml
 bun tauri build        # release bundle
 ```
 
+CI runs the tests, build and clippy on each push. To make installers for macOS (Apple silicon and Intel), Windows and Linux, push a tag such as `v0.1.0`: the Release workflow attaches them to a draft GitHub release.
+
 Binary assets (images, audio, MIDI, fonts) are stored with [Git LFS](https://git-lfs.com). Run `git lfs install` before you clone.
 
 ## Licence
