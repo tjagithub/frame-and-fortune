@@ -1,0 +1,25 @@
+[package]
+name = "frame-the-game"
+version = "0.1.0"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+
+[lib]
+name = "frame_the_game_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+walkdir = "2"
+ureq = "2"
+axum = { version = "0.8", features = ["ws"] }
+tokio = { version = "1.54.1", features = ["sync", "net", "rt", "macros"] }
+futures-util = "0.3.34"
+local-ip-address = "0.6.13"
